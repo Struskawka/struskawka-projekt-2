@@ -39,18 +39,30 @@ public:
 		st->pokaz_stol();
 		gracze_tab[tura].posortuj_karty_gracza();
 		gracze_tab[tura].pokaz_karty_gracza();
-
-		int nr_karty;
-		cout << "ktora karte wybrac: "; cin >> nr_karty;
-		st->doloz_na_stol(gracze_tab[tura].wyloz(nr_karty));
-		gracze_tab[tura].wyloz_2(nr_karty);
-
-
 		
+		int opcja;
+		int nr_karty;
+		
+		cout << "1. wyloz karte"<<endl<<"2. dobierz karte"<<endl; cin >> opcja;
+		while(opcja != 1 && opcja != 2) { cout << "niepoprawny numer, podaj poprawny  "; cin >> opcja; }
 
+		if(opcja == 1) {
+			cout << "ktora karte wybrac: "; cin >> nr_karty;
+
+			while(st->czy_mozna_dolozyc(gracze_tab[tura].czy_mozna_dolozyc_gracz(nr_karty))==0) 
+			{ cout << "nie mozesz dolozyc tej karty, jesli chcesz dobrac karte wpisz -1"; cin >> nr_karty;
+			if(nr_karty == -1)break;
+			}
+			
+			if(nr_karty != -1) {
+				st->doloz_na_stol(gracze_tab[tura].wyloz(nr_karty));
+				gracze_tab[tura].wyloz_2(nr_karty);}}
+
+		if(opcja == 2||nr_karty==-1) {gracze_tab[tura].dobierz(1, ta);}
+		
 		} while(gracze_tab[tura].pokaz_ilosc_kart_gracz() > 0);
 
-
+		cout << endl << endl << "wygrywa gracz " << tura << endl << endl;
 
 
 //---------czyszczenie------------
